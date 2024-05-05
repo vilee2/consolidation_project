@@ -3,24 +3,18 @@
 import random
 import numpy as np
 
-# asks how many players are playing the game
-# player_count = input("How many players are playing?\n")
-
-
-player_points = {"Player 1" : 0}
+# asks how many players are playing the game 
+player_count = input("How many players are playing?\n")
 
 die_faces = (1, 2, 3, 4, 5, 6)
 
-roll_results = []
-roll_counts = {1 : 0, 2 : 0, 3 : 0, 4 : 0, 5 : 0, 6 : 0} 
-
-
-def dice_roll(player):
-    """rolls three different dice and assigns points according to the game's rules"""
+# functions to simulate each player's turn
+def player1_turn():
+    """Simulates one turn for 'Player 1' - rolls three different dice and assigns points according to the game's rules"""
+    roll_results = []
     for dice_roll in range(3):
         this_roll = random.choice(die_faces)
         roll_results.append(this_roll)
-        roll_counts[this_roll] += 1
 
     # if all three dice return the same value, you 'tupled out' and earn 0 points
     if roll_results[0] == roll_results[1] and roll_results[1] == roll_results[2]:
@@ -29,20 +23,148 @@ def dice_roll(player):
     # if the outcome for two out of three dice are the same, those dice are fixed and cannot be re-rolled
     elif roll_results[0] == roll_results[1] or roll_results[0] == roll_results[2] or roll_results[1] == roll_results[2]:
         print("These two dice have the same value and are 'fixed'. They cannot be re-rolled")
-        if roll_results[0] == roll_results[1] and roll_results[1] != roll_results[2]:
-            reroll = random.choice(die_faces)
-            player_points[reroll] += reroll + roll_results[0] * 2
-        elif roll_results[1] == roll_results[2] and roll_results[1] != roll_results[0]:
-            reroll = random.choice(die_faces)
-            player_points[reroll] += reroll + roll_results[1] * 2
-        elif roll_results[2] == roll_results[0] and roll_results[0] != roll_results[1]:
-            reroll = random.choice(die_faces)
-            player_points[reroll] += reroll + roll_results[2] * 2
+        reroll_choice = input("Do you want to reroll the 'unfixed' die? If so, type 'y' or 'n' \n")
+        # rerolls the 'unfixed' die if player wants to
+        if reroll_choice == 'y':
+            if roll_results[0] == roll_results[1] and roll_results[1] != roll_results[2]:
+                reroll = random.choice(die_faces)
+                player_points["Player 1"] += reroll + roll_results[0] * 2
+            elif roll_results[1] == roll_results[2] and roll_results[1] != roll_results[0]:
+                reroll = random.choice(die_faces)
+                player_points["Player 1"] += reroll + roll_results[1] * 2
+            elif roll_results[2] == roll_results[0] and roll_results[0] != roll_results[1]:
+                reroll = random.choice(die_faces)
+                player_points["Player 1"] += reroll + roll_results[2] * 2
+        elif reroll_choice == 'n':
+            print(f"Your turn has ended and these are your current points: {player_points}")
     else:
         player_points["Player 1"] += sum(roll_results)
     return print(f"These are the current points: {player_points}")
 
+def player2_turn():
+    """Simulates one turn for 'Player 2' - rolls three different dice and assigns points according to the game's rules"""
+    roll_results = []
+    for dice_roll in range(3):
+        this_roll = random.choice(die_faces)
+        roll_results.append(this_roll)
 
+    # if all three dice return the same value, you 'tupled out' and earn 0 points
+    if roll_results[0] == roll_results[1] and roll_results[1] == roll_results[2]:
+        print("You have 'tupled out' so you earned 0 points for this turn.")
+        
+    # if the outcome for two out of three dice are the same, those dice are fixed and cannot be re-rolled
+    elif roll_results[0] == roll_results[1] or roll_results[0] == roll_results[2] or roll_results[1] == roll_results[2]:
+        print("These two dice have the same value and are 'fixed'. They cannot be re-rolled")
+        reroll_choice = input("Do you want to reroll the 'unfixed' die? If so, type 'y' or 'n' \n")
+        # rerolls the 'unfixed' die if player wants to
+        if reroll_choice == 'y':
+            if roll_results[0] == roll_results[1] and roll_results[1] != roll_results[2]:
+                reroll = random.choice(die_faces)
+                player_points["Player 2"] += reroll + roll_results[0] * 2
+            elif roll_results[1] == roll_results[2] and roll_results[1] != roll_results[0]:
+                reroll = random.choice(die_faces)
+                player_points["Player 2"] += reroll + roll_results[1] * 2
+            elif roll_results[2] == roll_results[0] and roll_results[0] != roll_results[1]:
+                reroll = random.choice(die_faces)
+                player_points["Player 2"] += reroll + roll_results[2] * 2
+        elif reroll_choice == 'n':
+            print(f"Your turn has ended and these are your current points: {player_points}")
+    else:
+        player_points["Player 2"] += sum(roll_results)
+    return print(f"These are the current points: {player_points}")
+
+def AI_turn():
+    """Simulates one turn for 'AI' - rolls three different dice and assigns points according to the game's rules"""
+    roll_results = []
+    for dice_roll in range(3):
+        this_roll = random.choice(die_faces)
+        roll_results.append(this_roll)
+
+    # if all three dice return the same value, you 'tupled out' and earn 0 points
+    if roll_results[0] == roll_results[1] and roll_results[1] == roll_results[2]:
+        print("AI has 'tupled out' so it earned 0 points for this turn.")
+        
+    # if the outcome for two out of three dice are the same, those dice are fixed and cannot be re-rolled
+    elif roll_results[0] == roll_results[1] or roll_results[0] == roll_results[2] or roll_results[1] == roll_results[2]:
+        player_points["AI"] += sum(roll_results)
+        print("These two dice have the same value and are 'fixed'. They cannot be re-rolled. AI turn has ended.")
+    else:
+        player_points["AI"] += sum(roll_results)
+    return print(f"These are the current points: {player_points}")
+
+def player3_turn():
+    """Simulates one turn for 'Player 3' - rolls three different dice and assigns points according to the game's rules"""
+    roll_results = []
+    for dice_roll in range(3):
+        this_roll = random.choice(die_faces)
+        roll_results.append(this_roll)
+
+    # if all three dice return the same value, you 'tupled out' and earn 0 points
+    if roll_results[0] == roll_results[1] and roll_results[1] == roll_results[2]:
+        print("You have 'tupled out' so you earned 0 points for this turn.")
+        
+    # if the outcome for two out of three dice are the same, those dice are fixed and cannot be re-rolled
+    elif roll_results[0] == roll_results[1] or roll_results[0] == roll_results[2] or roll_results[1] == roll_results[2]:
+        print("These two dice have the same value and are 'fixed'. They cannot be re-rolled")
+        reroll_choice = input("Do you want to reroll the 'unfixed' die? If so, type 'y' or 'n' \n")
+        # rerolls the 'unfixed' die if player wants to
+        if reroll_choice == 'y':
+            if roll_results[0] == roll_results[1] and roll_results[1] != roll_results[2]:
+                reroll = random.choice(die_faces)
+                player_points["Player 3"] += reroll + roll_results[0] * 2
+            elif roll_results[1] == roll_results[2] and roll_results[1] != roll_results[0]:
+                reroll = random.choice(die_faces)
+                player_points["Player 3"] += reroll + roll_results[1] * 2
+            elif roll_results[2] == roll_results[0] and roll_results[0] != roll_results[1]:
+                reroll = random.choice(die_faces)
+                player_points["Player 3"] += reroll + roll_results[2] * 2
+        elif reroll_choice == 'n':
+            print(f"Your turn has ended and these are your current points: {player_points}")
+    else:
+        player_points["Player 3"] += sum(roll_results)
+    return print(f"These are the current points: {player_points}")
+
+# test case - tests the player1_turn() function
+# player1_turn()
+
+if player_count == 1:
+    play_ai = input("Would you like to play against an 'AI' player? Enter: y or n \n")
+    if play_ai == 'y':
+        player_points = {"Player 1" : 0, "AI" : 0}
+        while player_points["Player 1"] < 50 or player_points["AI"] < 50:
+            player1_turn()
+            AI_turn()
+            if player_points["Player 1"] >= 50:
+                print(f"Congrats! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
+            elif player_points["AI"] >= 50:
+                print(f"Unfortunately, the AI player has won by being first to earn 50 points. This is the total score: {player_points}")
+    elif play_ai == 'n':
+        player_points = {"Player 1 : 0"}
+        while player_points["Player 1"] < 50:
+            player1_turn()
+            if player_points["Player 1"] >= 50:
+                print(f"Congrats! You earned 50 points and you won the game! These are your points: {player_points["Player 1"]}")
+elif player_count == 2:
+    player_points = {"Player 1" : 0, "Player 2" : 0}
+    while player_points["Player 1"] < 50 or player_points["Player 2"] < 50:
+            player1_turn()
+            player2_turn()
+            if player_points["Player 1"] >= 50:
+                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
+            elif player_points["Player 2"] >= 50:
+                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 2"]}")
+elif player_count == 3:
+    player_points = {"Player 1" : 0, "Player 2" : 0, "Player 3" : 0}
+    while player_points["Player 1"] < 50 or player_points["Player 2"] < 50 or player_points["Player 3"] < 50:
+            player1_turn()
+            player2_turn()
+            player3_turn()
+            if player_points["Player 1"] >= 50:
+                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
+            elif player_points["Player 2"] >= 50:
+                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 2"]}")
+            elif player_points["Player 3"] >= 50:
+                print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 3"]}")
 
 
 
