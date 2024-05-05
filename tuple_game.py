@@ -136,9 +136,11 @@ def player3_turn():
 
 # asks how many players are playing the game 
 player_count = input("How many players are playing? There is a maximum of 3 players. \n")
+# raises an error if an incorrect number of players are entered
 if player_count != 1 or player_count != 2 or player_count != 3:
     raise ValueError("You did not enter 1, 2, or 3. Please try again.")
 
+# executes the game, allows players to take turns, ends when a player reaches 50 points
 if player_count == "1":
     play_ai = input("Would you like to play against an 'AI' player? Enter: y or n \n")
     if play_ai == 'y':
@@ -186,8 +188,8 @@ elif player_count == "3":
             print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 3']}")
             break
 
+# adds final scores to a 'results' document
 message = f"""These are the final points for each player from the tuple game: {player_points}"""
-
 with open("tuple_game_results.txt", "a") as output_connection:
     output_connection.write(message)
 

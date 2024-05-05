@@ -22,7 +22,19 @@ The current scores are displayed at the end of each player's turn.
 The game will move on to the next player's turn and follow the above procedure. 
 The game continues until a player reaches 50 points. That player wins the game and the game ends.
 
+## The Game Can...:
+The game can ask how many players are playing the game.
+The game can have players take turns rolling dice.
+The game can have players press 'enter' on their keyboard as an interactive way to roll the dice.
+The game has the option for a single player to play against an AI player.
+The game can display the running scores, so that players know what the current scores are. 
+The game can record the scores of each player at the end of the game and write it to a results text file. 
+
 ## Limitations of the Game:
 The game cannot have more than three players.
 Aside from re-rolling a die that is 'unfixed', players cannot re-roll a die. 
 When re-rolling a die that is 'unfixed', players cannot keep re-rolling the die. (Players can only re-roll an 'unfixed' die once.)
+The game cannot record high score records and it cannot record who won. 
+The game cannot change the dice.
+There is no special scoring. 
+
