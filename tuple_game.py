@@ -1,16 +1,16 @@
 
 # this import allows to "roll dice" by randomly selecting a number from die_faces
 import random
-import numpy as np
 
-# asks how many players are playing the game 
-player_count = input("How many players are playing?\n")
+# prints a welcome statement to the players of the game
+print("Hello world and welcome to the Tuple Out Game!")
 
 die_faces = (1, 2, 3, 4, 5, 6)
 
 # functions to simulate each player's turn
 def player1_turn():
     """Simulates one turn for 'Player 1' - rolls three different dice and assigns points according to the game's rules"""
+    input("Player 1 turn. Press the 'enter' key on your keyboard to roll the three dice. \n")
     roll_results = []
     for dice_roll in range(3):
         this_roll = random.choice(die_faces)
@@ -39,10 +39,11 @@ def player1_turn():
             print(f"Your turn has ended and these are your current points: {player_points}")
     else:
         player_points["Player 1"] += sum(roll_results)
-    return print(f"These are the current points: {player_points}")
+    return print(f"Your turn has ended. These are the current points: {player_points}")
 
 def player2_turn():
     """Simulates one turn for 'Player 2' - rolls three different dice and assigns points according to the game's rules"""
+    input("Player 2 turn. Press the 'enter' key on your keyboard to roll the three dice. \n")
     roll_results = []
     for dice_roll in range(3):
         this_roll = random.choice(die_faces)
@@ -71,10 +72,11 @@ def player2_turn():
             print(f"Your turn has ended and these are your current points: {player_points}")
     else:
         player_points["Player 2"] += sum(roll_results)
-    return print(f"These are the current points: {player_points}")
+    return print(f"Your turn has ended. These are the current points: {player_points}")
 
 def AI_turn():
     """Simulates one turn for 'AI' - rolls three different dice and assigns points according to the game's rules"""
+    print("AI player turn")
     roll_results = []
     for dice_roll in range(3):
         this_roll = random.choice(die_faces)
@@ -90,10 +92,11 @@ def AI_turn():
         print("These two dice have the same value and are 'fixed'. They cannot be re-rolled. AI turn has ended.")
     else:
         player_points["AI"] += sum(roll_results)
-    return print(f"These are the current points: {player_points}")
+    return print(f"AI's turn has ended. These are the current points: {player_points}")
 
 def player3_turn():
     """Simulates one turn for 'Player 3' - rolls three different dice and assigns points according to the game's rules"""
+    input("Player 3 turn. Press the 'enter' key on your keyboard to roll the three dice. \n")
     roll_results = []
     for dice_roll in range(3):
         this_roll = random.choice(die_faces)
@@ -122,12 +125,18 @@ def player3_turn():
             print(f"Your turn has ended and these are your current points: {player_points}")
     else:
         player_points["Player 3"] += sum(roll_results)
-    return print(f"These are the current points: {player_points}")
+    return print(f"Your turn has ended. These are the current points: {player_points}")
 
-# test case - tests the player1_turn() function
+# test case 1 - tests the player1_turn() function
 # player1_turn()
 
-if player_count == 1:
+# test case 2 - tests the player2_turn() function
+#player2_turn()
+
+# asks how many players are playing the game 
+player_count = input("How many players are playing? There is a maximum of 3 players. \n")
+
+if player_count == "1":
     play_ai = input("Would you like to play against an 'AI' player? Enter: y or n \n")
     if play_ai == 'y':
         player_points = {"Player 1" : 0, "AI" : 0}
@@ -135,36 +144,44 @@ if player_count == 1:
             player1_turn()
             AI_turn()
             if player_points["Player 1"] >= 50:
-                print(f"Congrats! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
+                print(f"Congrats! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+                break
             elif player_points["AI"] >= 50:
                 print(f"Unfortunately, the AI player has won by being first to earn 50 points. This is the total score: {player_points}")
+                break
     elif play_ai == 'n':
-        player_points = {"Player 1 : 0"}
+        player_points = {"Player 1" : 0}
         while player_points["Player 1"] < 50:
             player1_turn()
             if player_points["Player 1"] >= 50:
-                print(f"Congrats! You earned 50 points and you won the game! These are your points: {player_points["Player 1"]}")
-elif player_count == 2:
+                print(f"Congrats! You earned 50 points and you won the game! These are your points: {player_points['Player 1']}")
+                break
+elif player_count == "2":
     player_points = {"Player 1" : 0, "Player 2" : 0}
     while player_points["Player 1"] < 50 or player_points["Player 2"] < 50:
-            player1_turn()
-            player2_turn()
-            if player_points["Player 1"] >= 50:
-                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
-            elif player_points["Player 2"] >= 50:
-                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 2"]}")
-elif player_count == 3:
+        player1_turn()
+        player2_turn()
+        if player_points["Player 1"] >= 50:
+            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+            break
+        elif player_points["Player 2"] >= 50:
+            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}")
+            break
+elif player_count == "3":
     player_points = {"Player 1" : 0, "Player 2" : 0, "Player 3" : 0}
     while player_points["Player 1"] < 50 or player_points["Player 2"] < 50 or player_points["Player 3"] < 50:
-            player1_turn()
-            player2_turn()
-            player3_turn()
-            if player_points["Player 1"] >= 50:
-                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 1"]}")
-            elif player_points["Player 2"] >= 50:
-                print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 2"]}")
-            elif player_points["Player 3"] >= 50:
-                print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points["Player 3"]}")
+        player1_turn()
+        player2_turn()
+        player3_turn()
+        if player_points["Player 1"] >= 50:
+            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+            break
+        elif player_points["Player 2"] >= 50:
+            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}")
+            break
+        elif player_points["Player 3"] >= 50:
+            print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 3']}")
+            break
 
 
 
