@@ -1,1 +1,1 @@
-These are the final points for each player from the tuple game: {'Player 1': 51, 'AI': 43}
+These are the final points for each player from the tuple game: {'Player 1': 51, 'AI': 43}These are the final points for each player from the tuple game: {'Player 1': 55, 'AI': 61}These are the final points for each player from the tuple game: {'Player 1': 56, 'Player 2': 37}These are the final points for each player from the tuple game: {'Player 1': 57, 'Player 2': 51, 'Player 3': 43}
