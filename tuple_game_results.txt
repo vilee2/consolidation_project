@@ -1,0 +1,1 @@
+These are the final points for each player from the tuple game: {'Player 1': 51, 'AI': 43}
