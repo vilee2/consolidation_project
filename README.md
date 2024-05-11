@@ -29,13 +29,14 @@ The game can have players press 'enter' on their keyboard as an interactive way 
 The game has the option for a single player to play against an AI player.
 The game can display the running scores, so that players know what the current scores are. 
 The game can record the scores of each player at the end of the game and write it to a results text file. 
-The game can use pandas and matplotlib to create a data frame and graph the scores of the players.
+The game can record the wins of each player at the end of the game and write it to a results text file. 
+The game can use pandas and matplotlib to create a data frame and create a bar graph of the players' scores. 
 
 ## Limitations of the Game:
 The game cannot have more than three players.
 Aside from re-rolling a die that is 'unfixed', players cannot re-roll a die. 
 When re-rolling a die that is 'unfixed', players cannot keep re-rolling the die. (Players can only re-roll an 'unfixed' die once.)
-The game cannot record high score records and it cannot record who won. 
+The game cannot record high score records. 
 The game cannot change the dice.
 There is no special scoring. 
 

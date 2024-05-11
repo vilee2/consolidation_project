@@ -135,6 +135,7 @@ def player3_turn():
 # test case 2 - tests the player2_turn() function
 #player2_turn()
 
+
 # asks how many players are playing the game 
 player_count = input("How many players are playing? There is a maximum of 3 players. \n")
 
@@ -143,54 +144,68 @@ if player_count == "1":
     play_ai = input("Would you like to play against an 'AI' player? Enter: y or n \n")
     if play_ai == 'y':
         player_points = {"Player 1" : 0, "AI" : 0}
+        player_wins = {"Player 1" : 0, "AI" : 0}
         while player_points["Player 1"] < 50 or player_points["AI"] < 50:
             player1_turn()
             AI_turn()
             if player_points["Player 1"] >= 50:
-                print(f"Congrats! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+                print(f"Congrats! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}. These are your wins: {player_wins['Player 1']}")
+                # keeps track of player wins
+                player_wins["Player 1"] += 1
                 break
             elif player_points["AI"] >= 50:
-                print(f"Unfortunately, the AI player has won by being first to earn 50 points. This is the total score: {player_points}")
+                player_wins["AI"] += 1
+                print(f"Unfortunately, the AI player has won by being first to earn 50 points. This is the total score: {player_points}. These are AI's wins: {player_wins['AI']}")
                 break
     elif play_ai == 'n':
         player_points = {"Player 1" : 0}
+        player_wins = {"Player 1" : 0}
         while player_points["Player 1"] < 50:
             player1_turn()
             if player_points["Player 1"] >= 50:
-                print(f"Congrats! You earned 50 points and you won the game! These are your points: {player_points['Player 1']}")
+                player_wins["Player 1"] += 1
+                print(f"Congrats! You earned 50 points and you won the game! These are your points: {player_points['Player 1']}. These are your wins: {player_wins['Player 1']}")
                 break
 elif player_count == "2":
     player_points = {"Player 1" : 0, "Player 2" : 0}
+    player_wins = {"Player 1" : 0, "Player 2" : 0}
     while player_points["Player 1"] < 50 or player_points["Player 2"] < 50:
         player1_turn()
         player2_turn()
         if player_points["Player 1"] >= 50:
-            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+            player_wins["Player 1"] += 1
+            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}. These are your wins: {player_wins['Player 1']}")
             break
         elif player_points["Player 2"] >= 50:
-            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}")
+            player_wins["Player 2"] += 1
+            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}. These are your wins: {player_wins['Player 2']}")
             break
 elif player_count == "3":
     player_points = {"Player 1" : 0, "Player 2" : 0, "Player 3" : 0}
+    player_wins = {"Player 1" : 0, "Player 2" : 0, "Player 3" : 0}
     while player_points["Player 1"] < 50 or player_points["Player 2"] < 50 or player_points["Player 3"] < 50:
         player1_turn()
         player2_turn()
         player3_turn()
         if player_points["Player 1"] >= 50:
-            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}")
+            player_wins["Player 1"] += 1
+            print(f"Congrats Player 1! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 1']}. These are your wins: {player_wins['Player 1']}")
             break
         elif player_points["Player 2"] >= 50:
-            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}")
+            player_wins["Player 2"] += 1
+            print(f"Congrats Player 2! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 2']}. These are your wins: {player_wins['Player 2']}")
             break
         elif player_points["Player 3"] >= 50:
-            print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 3']}")
+            player_wins["Player 3"] += 1
+            print(f"Congrats Player 3! You were first to earn 50 points and you won the game! These are your points: {player_points['Player 3']}. These are your wins: {player_wins['Player 3']}")
             break
 
 # adds final scores to a 'results' document
-message = f"""These are the final points for each player from the tuple game: {player_points}\n"""
+message = f"""These are the final points for each player from the tuple game: {player_points}. These are the wins for each player from the tuple game: {player_wins}. \n"""
 with open("tuple_game_results.txt", "a") as output_connection:
     output_connection.write(message)
 
+# turns player_points (a dictionary) into a dataframe then plots a bar graph of the points
 player_names = list(player_points.keys())
 player_scores = list(player_points.values())
 player_data = {"player" : player_names,
