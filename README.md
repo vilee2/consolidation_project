@@ -29,6 +29,7 @@ The game can have players press 'enter' on their keyboard as an interactive way 
 The game has the option for a single player to play against an AI player.
 The game can display the running scores, so that players know what the current scores are. 
 The game can record the scores of each player at the end of the game and write it to a results text file. 
+The game can use pandas and matplotlib to create a data frame and graph the scores of the players.
 
 ## Limitations of the Game:
 The game cannot have more than three players.

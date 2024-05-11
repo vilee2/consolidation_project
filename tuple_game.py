@@ -1,7 +1,8 @@
 
-
 # this import allows to "roll dice" by randomly selecting a number from die_faces
 import random
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # prints a welcome statement to the players of the game
 print("Hello world and welcome to the Tuple Out Game!")
@@ -190,6 +191,11 @@ message = f"""These are the final points for each player from the tuple game: {p
 with open("tuple_game_results.txt", "a") as output_connection:
     output_connection.write(message)
 
+player_names = list(player_points.keys())
+player_scores = list(player_points.values())
+player_data = {"player" : player_names,
+               "scores" : player_scores}
+score_dataframe = pd.DataFrame(data = player_data)
 
-
-
+plt.bar(x = "player", height = "scores", data = score_dataframe)
+plt.show()
